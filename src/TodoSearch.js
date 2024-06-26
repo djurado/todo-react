@@ -5,6 +5,11 @@ function TodoSearch() {
     <input
       placeholder="Busca tareas"
       className="TodoSearch"
+      onChange={
+        (event) => {
+            console.log(event.target.value);
+        }
+      }
     />
   );
 }
