@@ -1,11 +1,12 @@
-import logo from './platzi.webp';
+import logo from '../platzi.webp';
 import './App.css';
-import { TodoCounter } from './TodoCounter';
-import { TodoSearch } from './TodoSearch';
-import { TodoList } from './TodoList';
-import { TodoItem } from './TodoItem';
-import { CreateTodoButton } from './CreateTodoButton';
+import { TodoCounter } from '../TodoCounter';
+import { TodoSearch } from '../TodoSearch';
+import { TodoList } from '../TodoList';
+import { TodoItem } from '../TodoItem';
+import { CreateTodoButton } from '../CreateTodoButton';
 import React from 'react';
+import { useLocalStorage } from './useLocalStorage';
 
 // const defaultTodos = [
 //   {text: 'Crear los temas del taller de FP', completed: false},
@@ -17,25 +18,6 @@ import React from 'react';
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
 // localStorage.removeItem('TODOS_V1');
 
-function useLocalStorage(itemName, initialValue){
-
-  const lsItem = localStorage.getItem(itemName);
-  let parsedItem = initialValue;
-  if(!lsItem){
-    localStorage.setItem(itemName, JSON.stringify(initialValue) );
-  }else{
-    parsedItem = JSON.parse(lsItem);
-  }
-
-  const [item, setItem] = React.useState(parsedItem);
-  
-  const saveItem = (newItem) => {
-    localStorage.setItem(itemName, JSON.stringify(newItem));
-    setItem(newItem);
-  }
-
-  return [item, saveItem];
-}
 
 
 function App() {
@@ -49,7 +31,7 @@ function App() {
     todo.text.toLowerCase().includes(searchValue.toLowerCase())) );
   const completeTodo = (text) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
 
     newTodos[todoIndex].completed = true;
     saveTodos(newTodos);
@@ -58,7 +40,7 @@ function App() {
   };
   const deleteTodo = (text) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
 
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
