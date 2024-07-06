@@ -1,12 +1,7 @@
-import logo from '../platzi.webp';
 import './App.css';
-import { TodoCounter } from '../TodoCounter';
-import { TodoSearch } from '../TodoSearch';
-import { TodoList } from '../TodoList';
-import { TodoItem } from '../TodoItem';
-import { CreateTodoButton } from '../CreateTodoButton';
 import React from 'react';
 import { useLocalStorage } from './useLocalStorage';
+import { AppUI } from './AppUI';
 
 // const defaultTodos = [
 //   {text: 'Crear los temas del taller de FP', completed: false},
@@ -46,21 +41,15 @@ function App() {
     saveTodos(newTodos);
   };
   return (
-    <>
-      <TodoCounter completed={completed} total={total}/>
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
-      <TodoList>
-        {searchedTodos.map(todo =>(
-          <TodoItem key={todo.text} text={todo.text} completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton />
-    </>
+    <AppUI 
+      completed = {completed}
+      total = {total}
+      searchValue = {searchValue}
+      setSearchValue = {setSearchValue } 
+      completeTodo = {completeTodo } 
+      deleteTodo = {deleteTodo } 
+      searchedTodos = {searchedTodos}
+    />
   );
 }
 export default App;
