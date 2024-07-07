@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { AppUI } from './AppUI';
 
+// localStorage.removeItem('TODOS_V1');
 // const defaultTodos = [
 //   {text: 'Crear los temas del taller de FP', completed: false},
 //   {text: 'Lavar los platos', completed: true},
@@ -11,13 +12,17 @@ import { AppUI } from './AppUI';
 // ];
 
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
-// localStorage.removeItem('TODOS_V1');
 
 
 
 function App() {
   
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage('TODOS_V1', []);
   const completed = todos.filter((todo) => !!todo.completed).length;
   const total = todos.length;
   const [searchValue, setSearchValue] = React.useState('');
@@ -42,6 +47,8 @@ function App() {
   };
   return (
     <AppUI 
+      loading = {loading}
+      error = {error}
       completed = {completed}
       total = {total}
       searchValue = {searchValue}
