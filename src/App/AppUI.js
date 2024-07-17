@@ -44,6 +44,9 @@ function AppUI() {
         ))}
       </TodoList>
       <CreateTodoButton />
+      {/* <Modal>
+        La funcionalidad
+      </Modal> */}
     </>
   );
 }
